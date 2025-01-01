@@ -1,0 +1,3 @@
+<mod:findLike type="scripts">
+    <mod-append:script>data/speedhack_indicator/init.lua</mod-append:script>
+</mod:findLike>
