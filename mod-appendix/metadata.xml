@@ -15,7 +15,8 @@
 		If there's no thread yet, create one to announce your upcoming mod in the
 		forum. Then paste the url here.
 	-->
-	<threadUrl><![CDATA[  ]]></threadUrl>
+	<!-- Why the hell does slipstream not make this optional??! -->
+	<threadUrl><![CDATA[ http://example.com ]]></threadUrl>
 
 
 	<!-- Your forum user name. -->
@@ -35,7 +36,7 @@
 
 	<description>
 <![CDATA[
-
+An addon for Faster than Light Hyperspace, which'll show when the speedhack is toggled via an image in the bottom right corner and also makes the speedLevel persistent, removing the need to use the `SPEED` command on every game launch.
 ]]>
 	</description>
 
