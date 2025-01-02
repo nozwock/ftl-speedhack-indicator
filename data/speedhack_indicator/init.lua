@@ -45,18 +45,21 @@ do
 	end
 end
 
+local Global = Hyperspace.Global.GetInstance()
+local CApp = Global:GetCApp()
+
 ---@param text string
 ---@param x integer
 ---@param y integer
 ---@param width integer
 ---@param height integer
-local function renderTooltip(text, x, y, width, height)
-	local mousePos = Hyperspace.Mouse.position
-	if not mousePos then
-		log("Failed to get mouse position")
+---@param show_on_menu_pause? boolean
+local function renderTooltip(text, x, y, width, height, show_on_menu_pause)
+	if not show_on_menu_pause and CApp.gui.menu_pause then
 		return
 	end
 
+	local mousePos = Hyperspace.Mouse.position
 	if (mousePos.x >= x and mousePos.x <= x + width) and (mousePos.y >= y and mousePos.y <= y + height) then
 		Hyperspace.Mouse:SetTooltip(text)
 	end
