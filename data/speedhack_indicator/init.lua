@@ -13,13 +13,13 @@ do
 	local defaultColor = Graphics.GL_Color(1, 1, 1, 1)
 
 	---@param texture GL_Texture
-	---@param pos Point
-	function Image.new(texture, pos)
+	---@param position Point
+	function Image.new(texture, position)
 		local img = {
 			---@class ImageData
 			data = {
 				texture = texture,
-				position = pos,
+				position = position,
 			},
 		}
 		setmetatable(img, imageMetaTable)
@@ -66,12 +66,13 @@ local function renderTooltip(text, x, y, width, height, show_on_menu_pause)
 end
 
 local indicatorImage = Image.new(Hyperspace.Resources:GetImageId("statusUI/speedhack.png"), Hyperspace.Point(1218, 622))
+local indicatorImageSize = Hyperspace.Point(32, 33)
 
 -- References-
 -- FTL Insurrection+ for Hyperspace- speedcontrol.lua, events.xml:351, events.xml:396
 
 script.on_init(function()
-	-- Metavars needs be accessed on init seemingly, will give wrong value otherwise
+	-- Seemingly, metavars needs to be accessed on init, they'll give wrong value otherwise
 	Hyperspace.FPS.speedLevel = Hyperspace.metaVariables.speedHackIndicatorSpeedLevel
 	Hyperspace.FPS.speedEnabled = false
 end)
@@ -86,8 +87,8 @@ script.on_render_event(Defines.RenderEvents.FTL_BUTTON, function()
 			string.format("Speed Level: %dx", speedLevel),
 			indicatorImage.data.position.x,
 			indicatorImage.data.position.y,
-			32,
-			33
+			indicatorImageSize.x,
+			indicatorImageSize.y
 		)
 	end
 end, function() end)
