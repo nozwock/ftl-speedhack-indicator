@@ -4,13 +4,17 @@ shopt -s extglob
 CWD="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")"
 cd "$CWD"
 
-modFileName="$(basename "$CWD")"
-modsDir="$(realpath -s "$1")"
+modFileName="$(basename "$CWD")" # i.e. same as the mod folder name
+outputDir="$(realpath -s "$1")"
+modFilePath="$outputDir/$modFileName.ftl"
 
-if [ -d "$modsDir" ]; then
-    echo Saving as \`"$modsDir/$modFileName.ftl"\`
-    zip -r "$modsDir/$modFileName.ftl" !(.git)
+if [ -d "$outputDir" ]; then
+    if [ -f "$modFilePath" ]; then
+        command rm -f "$modFilePath"
+    fi
+    echo Saving as \`"$modFilePath"\`
+    zip -r "$modFilePath" $(command ls -I build.sh -I README.md)
 else
-    echo "Path to slipstream's mods/ directory is required!"
+    echo "Path to output directory is required!"
     exit 1
 fi
